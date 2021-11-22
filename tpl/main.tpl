@@ -27,6 +27,9 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/custom.css">
  
 
     <!-- Color CSS Styles  -->
@@ -50,22 +53,22 @@
           </div>
           <div class="collapse navbar-collapse" id="main-navbar">
             <ul class="navbar-nav mr-auto w-100 justify-content-end">
-                <li class="nav-item active">
+                <li class="nav-item %active_navbar_index%">
                     <a class="nav-link" href="index.php">
                         Главная
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item %active_navbar_helpers%">
                     <a class="nav-link" href="index.php?route=helpers">
                         Предложения помощи
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item %active_navbar_needs%">
                     <a class="nav-link" href="index.php?route=needs">
                         Нужна помощь
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item %active_navbar_orgs%">
                     <a class="nav-link" href="index.php?route=organizations">
                         Организации
                     </a>
@@ -123,8 +126,8 @@
         <div class="row">
           <!--First column-->
           <div class="col-md-12 col-lg-4 col-xl-4 footer-contact-widget">
-              <h3 class="footer-title">О проете</h3>
-              <p>Веб-сервис, где каждый житель Югры сможет разместить информацию о той помощи, которую он может оказать (как пример: дарение вещей, оказание услуг по доставке еды, медикаментов для одиноких и так далее). Также необходимо предусмотреть возможность разместить контактную информацию об объединениях волонтеров и добровольцев.</p>
+              <h3 class="footer-title">О проекте</h3>
+              <p>Веб-сервис, где каждый житель Урая сможет разместить информацию о той помощи, которую он может оказать (как пример: дарение вещей, оказание услуг по доставке еды, медикаментов для одиноких и так далее). Также необходимо предусмотреть возможность разместить контактную информацию об объединениях волонтеров и добровольцев.</p>
           </div>
           <!--/.First column-->
 
@@ -132,9 +135,10 @@
           <div class="col-md-12 col-lg-4 col-xl-4 link-widget">
             <h3 class="footer-title">Быстрый переход</h3>
             <ul>
+              <li><a href="?route=moder">Модерация</a></li>
               <li><a href="?route=helpers">Предложения</a></li>
               <li><a href="?route=needs">Запросы</a></li>
-              <li><a href="?route=addHelpers">Добавить пделожение</a></li>
+              <li><a href="?route=addHelpers">Добавить предложение</a></li>
               <li><a href="?route=addNeeds">Добавить запрос</a></li>
               <li><a href="?route=organizations">Организации</a></li>
               <li><a href="?route=addOrganizations">Добавить организацию</a></li>
@@ -167,7 +171,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <p>&copy; 2020 МБУ ДО "ЦМДО" <i class="mdi mdi-heart"></i> by <a href="http://vk.com/zorgo">ZORGO</a></p>
+                    <p>&copy; 2021 МБУ ДО "ЦМДО" <i class="mdi mdi-heart"></i> by <a href="http://vk.com/zorgo">ZORGO</a></p>
                 </div>
             </div>
           </div>

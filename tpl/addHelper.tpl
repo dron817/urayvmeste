@@ -15,6 +15,7 @@
                     <div class="col-md-6 mt-3 contact-widget-section2 wow animated fadeInLeft" data-wow-delay=".2s">
                         <p class="form-desc">Не можешь пройти мимо котенка на улице, всегда отзываешься на просьбы незнакомых людей.
                             Размести предложение о помощи, на нашем сайте, и оно не останется без внимания</p>
+                        <p class="form-desc">Нажимая на кнопку "Предложить" вы соглашаетесь на обработку персональных данных  и передачу их третьим лицам</p>
                     </div>
                     <!-- contact form -->
                     <div class="col-md-6 wow animated fadeInRight" data-wow-delay=".2s">
@@ -55,7 +56,6 @@
                                        data-error="Пожалуйста, введите номер телефона">
                                 <div class="help-block with-errors"></div>
                             </div>
-
                             <input type="hidden" name="addHelper" value="true" class="form-submit mt-5 hidden">
                             <!-- Form Submit -->
                             <div class="form-submit mt-5">

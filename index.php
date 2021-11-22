@@ -1,7 +1,7 @@
 <?php
 function __autoload($class_name) {
 	$filename = strtolower($class_name) . '.php';
-	$file = site_path . 'classes' . DIRSEP . $filename;	
+	$file = site_path . 'classes' . DIRSEP . $filename;
 	//print_r(realpath(dirname(__FILE__));
 	//$file = 'http:'. DIRSEP . DIRSEP .'89cargotaxi.mcdir.ru'. DIRSEP .'classes'. DIRSEP .'registry.php';
 	if (file_exists($file) == false) {
@@ -9,8 +9,6 @@ function __autoload($class_name) {
 	}
 	include ($file);
 }
-
-	
 error_reporting (E_ALL);
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
@@ -18,7 +16,7 @@ ini_set('display_startup_errors', 1);
 // Константы:
 define ('DIRSEP', DIRECTORY_SEPARATOR);
 // Узнаём путь до файлов сайта
-$site_path = realpath(dirname(__FILE__) . DIRSEP . '..' . DIRSEP) . DIRSEP . 'urayvmeste' . DIRSEP; //TODO при переезде возможны ошибки с 'www'
+$site_path = realpath(dirname(__FILE__) . DIRSEP . '..' . DIRSEP). DIRSEP . 'httpdocs' . DIRSEP; //TODO при переезде возможны ошибки с 'www'
 //print_r($site_path);
 define ('site_path', $site_path);
 # Создаём регистратуру
@@ -31,7 +29,10 @@ $registry->set ('db', $db);
 $template = new Template($registry);
 $registry->set ('template', $template);
 
-# Создаём коннектор помощьников
+# Создаём коннектор пользователей
+$users = new users($registry);
+$registry->set ('users', $users);
+# Создаём коннектор помощников
 $helpers = new helpers($registry);
 $registry->set ('helpers', $helpers);
 # Создаём коннектор просителей
@@ -43,22 +44,52 @@ $registry->set ('organizations', $organizations);
 //functions
 session_start();
 
+
 if (isset($_POST["addHelper"])){
 	$manage = new Manege ($registry);
 	$r = $manage->addHelper();
 	$manage->redirect($r);
 }
 elseif (isset($_POST["addNeed"])){
+    $manage = new Manege ($registry);
+    $r = $manage->addNeed();
+    $manage->redirect($r);
+}
+elseif (isset($_GET["confHelper"])){
 	$manage = new Manege ($registry);
-	$r = $manage->addNeed();
+	$r = $manage->confHelper();
+	$manage->redirect($r);
+}
+elseif (isset($_GET["confNeed"])){
+	$manage = new Manege ($registry);
+	$r = $manage->confNeed();
+	$manage->redirect($r);
+}
+elseif (isset($_GET["hideHelper"])){
+	$manage = new Manege ($registry);
+	$r = $manage->hideHelper();
+	$manage->redirect($r);
+}
+elseif (isset($_GET["hideNeed"])){
+	$manage = new Manege ($registry);
+	$r = $manage->hideNeed();
 	$manage->redirect($r);
 }
 elseif (isset($_POST["addOrganization"])){
 	$manage = new Manege ($registry);
 	$r = $manage->addOrganization();
-//	$manage->redirect($r);
+	$manage->redirect($r);
 }
-
+elseif (isset($_POST["auth"])){
+    $manage = new Manege ($registry);
+    $r = $manage->login();
+    $manage->redirect($r);
+}
+elseif (isset($_GET["logout"])){
+    $manage = new Manege ($registry);
+    $r = $manage->logout();
+    $manage->redirect($r);
+}
 
 # Загружаем router
 $router = new Router($registry);

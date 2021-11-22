@@ -9,6 +9,9 @@ class Controller_Index extends Controller_Base
         $values = [];
 
         $values["title"] = "Югра Вместе - От людей для людей";
+        $values["active_navbar_index"] = "active";
+
+
         $organizations = $this->registry['organizations']->getOrganizationsToMain();
         $values["org-items"] = '';
         foreach ($organizations as $organization) {

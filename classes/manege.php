@@ -4,7 +4,7 @@ class Manege{
 
 	private $data;
 	private $registry;
-	
+
 	public function __construct($registry){
 		$this->registry = $registry;
 		$this->data = $this->secureData(array_merge($_POST, $_GET));
@@ -23,19 +23,57 @@ class Manege{
 		exit;
 	}
 
+    public function login()
+    {
+        $login = $this->data["login"];
+        $password = $this->hashPassword($this->data["password"]);
+        $r = $this->registry['adress'] . $this->registry['moder_link'];
+        if ($this->registry['users']->checkUser($login, $password)) {
+            $_SESSION["login"] = $login;
+            $_SESSION["password"] = $password;
+            $_SESSION["id"] = $this->registry['users']->getIdOnLogin($login);
+            return $r;
+        } else
+            $_SESSION["error_auth"] = 1;
+        return $r;
+    }
+
+    public function logout()
+    {
+        unset($_SESSION["login"]);
+        unset($_SESSION["password"]);
+        unset($_SESSION["id"]);
+        return $this->registry['adress'];
+    }
+
 	public function addHelper(){
 		$helper['description'] = $this->data["description"];
 		$helper['name'] = $this->data["name"];
 		$helper['phone'] = $this->data["phone"];
 		$helper['email'] = $this->data["email"];
 		$helper['city'] = $this->data["city"];
-        $helper['time'] = time();
 		$result = $this->registry['helpers']->addHelper($helper);
 		if ($result){
-			return $this->returnPageMessege("SUCCESS_addHelper", $this->registry['adress'].$this->registry['helpers_link']);
+			return $this->returnPageMessege("SUCCESS_addHelper", $this->registry['adress'].$this->registry['sps_link']);
 		}
 		else
 			return $this->unknownError($this->registry['adress'].$this->registry['helpers_link']);
+	}
+	public function confHelper(){
+	    $result = $this->registry['helpers']->confHelper($this->data["confHelper"]);
+		if ($result){
+			return $this->returnPageMessege("SUCCESS_confHelper", $this->registry['adress'].$this->registry['moder_link']);
+		}
+		else
+			return $this->unknownError($this->registry['adress'].$this->registry['moder_link']);
+	}
+	public function hideHelper(){
+	    $result = $this->registry['helpers']->hideHelper($this->data["hideHelper"]);
+		if ($result){
+			return $this->returnPageMessege("SUCCESS_confHelper", $this->registry['adress'].$this->registry['moder_link']);
+		}
+		else
+			return $this->unknownError($this->registry['adress'].$this->registry['moder_link']);
 	}
 
 	public function addNeed(){
@@ -44,13 +82,28 @@ class Manege{
         $need['phone'] = $this->data["phone"];
         $need['email'] = $this->data["email"];
         $need['city'] = $this->data["city"];
-        $need['time'] = time();
         $result = $this->registry['needs']->addNeed($need);
         if ($result){
-            return $this->returnPageMessege("SUCCESS_addNeed", $this->registry['adress'].$this->registry['needs_link']);
+            return $this->returnPageMessege("SUCCESS_addNeed", $this->registry['adress'].$this->registry['sps_link']);
         }
         else
             return $this->unknownError($this->registry['adress'].$this->registry['needs_link']);
+	}
+	public function confNeed(){
+        $result = ($this->registry['needs']->confNeed($this->data["confNeed"]));
+        if ($result){
+            return $this->returnPageMessege("SUCCESS_addNeed", $this->registry['adress'].$this->registry['moder_link']);
+        }
+        else
+            return $this->unknownError($this->registry['adress'].$this->registry['moder_link']);
+	}
+	public function hideNeed(){
+        $result = ($this->registry['needs']->hideNeed($this->data["hideNeed"]));
+        if ($result){
+            return $this->returnPageMessege("SUCCESS_addNeed", $this->registry['adress'].$this->registry['moder_link']);
+        }
+        else
+            return $this->unknownError($this->registry['adress'].$this->registry['moder_link']);
 	}
 
 	public function addOrganization(){
@@ -64,7 +117,7 @@ class Manege{
 
         $result = $this->registry['organizations']->addOrganization($org);
         if ($result){
-            return $this->returnPageMessege("SUCCESS_addOrganization", $this->registry['adress'].$this->registry['organizations_link']);
+            return $this->returnPageMessege("SUCCESS_addOrganization", $this->registry['adress'].$this->registry['sps_link']);
         }
         else
             return $this->unknownError($this->registry['adress'].$this->registry['msg_link']);

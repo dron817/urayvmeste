@@ -7,7 +7,9 @@ class Controller_Organizations extends Controller_Base
 
         $values = [];
 
-        $values["title"] = "Югра Вместе - Благотворительные организаци";
+        $values["title"] = "Югра Вместе - Благотворительные организации";
+        $values["active_navbar_orgs"] = "active";
+
         $organizations = $this->registry['organizations']->getAllOrganizations();
         $values["org-items"] = '';
         foreach ($organizations as $organization) {

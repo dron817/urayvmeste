@@ -6,9 +6,11 @@
             <!-- Title -->
             <h2 class="subtitle">%name%</h2>
             <p>%desc%</p>
-            <p>%city%</p>
-            <p>%email%</p>
-            <p>%phone%</p>
+            <aside>
+                <a href="?contactNeeder=%id%">
+                    <i class="material-icons icon-round mdi mdi-account-edit"></i>
+                </a>
+            </aside>
         </div>
     </article>
 </div>

@@ -123,7 +123,7 @@ class db{
 		return $this->select($table_name, array("*"), "`$field`='".addslashes($value)."'", $order, $up, $limit);
 	}
 	
-	public function getAllOnfield($table_name, $field, $value, $order, $up){
+	public function getAllOnfield($table_name, $field, $value, $order = "id", $up = "ASC"){
 		return $this->select($table_name, array("*"), "`$field`='".addslashes($value)."'", $order, $up);
 	}
 	
